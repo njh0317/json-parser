@@ -78,6 +78,9 @@ function App() {
         </div>
       </div>
       <HistoryPanel isOpen={historyOpen} onClose={() => setHistoryOpen(false)} onSelect={onHistorySelect} />
+      <footer className="py-2 text-center text-sm text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700">
+        © 2026 wisdomslab.com
+      </footer>
       {toast && (
         <div className="fixed bottom-4 right-4 px-4 py-2 bg-green-500 text-white rounded-lg shadow-lg">
           {toast}
