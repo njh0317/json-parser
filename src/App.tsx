@@ -27,6 +27,7 @@ function App() {
   } = useJsonParser();
 
   const [historyOpen, setHistoryOpen] = useState(false);
+  const [faqOpen, setFaqOpen] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
 
   const showToast = (message: string) => {
@@ -78,41 +79,52 @@ function App() {
         </div>
       </div>
       <HistoryPanel isOpen={historyOpen} onClose={() => setHistoryOpen(false)} onSelect={onHistorySelect} />
-      {/* FAQ Section */}
-      <section className="px-4 py-6 bg-gray-50 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-lg font-semibold mb-4">Frequently Asked Questions</h2>
-          <div className="space-y-4">
-            <details className="group">
-              <summary className="cursor-pointer font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">
-                What is JSON?
-              </summary>
-              <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 pl-4">
-                JSON (JavaScript Object Notation) is a lightweight data interchange format that is easy for humans to read and write, and easy for machines to parse and generate.
-              </p>
-            </details>
-            <details className="group">
-              <summary className="cursor-pointer font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">
-                How do I format JSON?
-              </summary>
-              <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 pl-4">
-                Paste your JSON into the input panel and click the Format button. You can choose indentation options (2 spaces, 4 spaces, or tabs).
-              </p>
-            </details>
-            <details className="group">
-              <summary className="cursor-pointer font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">
-                Is this tool free?
-              </summary>
-              <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 pl-4">
-                Yes, this JSON parser is completely free to use with no limitations.
-              </p>
-            </details>
+      <footer className="py-2 text-center text-sm text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700 flex items-center justify-center gap-4">
+        <span>© 2026 wisdomslab.com</span>
+        <button
+          onClick={() => setFaqOpen(true)}
+          className="hover:text-blue-600 dark:hover:text-blue-400 underline"
+        >
+          FAQ
+        </button>
+      </footer>
+      {/* FAQ Modal */}
+      {faqOpen && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50" onClick={() => setFaqOpen(false)}>
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-lg w-full mx-4 max-h-[80vh] overflow-auto" onClick={e => e.stopPropagation()}>
+            <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
+              <h2 className="text-lg font-semibold">Frequently Asked Questions</h2>
+              <button onClick={() => setFaqOpen(false)} className="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 text-2xl">&times;</button>
+            </div>
+            <div className="p-4 space-y-4">
+              <details className="group" open>
+                <summary className="cursor-pointer font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">
+                  What is JSON?
+                </summary>
+                <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 pl-4">
+                  JSON (JavaScript Object Notation) is a lightweight data interchange format that is easy for humans to read and write, and easy for machines to parse and generate.
+                </p>
+              </details>
+              <details className="group">
+                <summary className="cursor-pointer font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">
+                  How do I format JSON?
+                </summary>
+                <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 pl-4">
+                  Paste your JSON into the input panel and click the Format button. You can choose indentation options (2 spaces, 4 spaces, or tabs).
+                </p>
+              </details>
+              <details className="group">
+                <summary className="cursor-pointer font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">
+                  Is this tool free?
+                </summary>
+                <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 pl-4">
+                  Yes, this JSON parser is completely free to use with no limitations.
+                </p>
+              </details>
+            </div>
           </div>
         </div>
-      </section>
-      <footer className="py-2 text-center text-sm text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700">
-        © 2026 wisdomslab.com
-      </footer>
+      )}
       {toast && (
         <div className="fixed bottom-4 right-4 px-4 py-2 bg-green-500 text-white rounded-lg shadow-lg">
           {toast}
